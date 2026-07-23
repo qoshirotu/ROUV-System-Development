@@ -1,252 +1,279 @@
 # 🚀 Underwater Plastic Waste Detection System
 
-An AI-powered underwater monitoring system designed to detect plastic waste in real time using computer vision, embedded systems, and a custom-built Remotely Operated Underwater Vehicle (ROUV).
+An AI-powered underwater monitoring system for real-time plastic waste detection using computer vision, embedded systems, and a custom-built Remotely Operated Underwater Vehicle (ROUV).
 
-## 📌 Project Overview
+---
 
-| Item               | Details                                  |
-| ------------------ | ---------------------------------------- |
-| **Role**           | AI Engineer & Embedded Systems Developer |
-| **Duration**       | 6 Months                                 |
-| **Domain**         | Computer Vision • Robotics • Embedded AI |
-| **Model**          | YOLO11n                                  |
-| **Inference Time** | 54 ms                                    |
-| **System Latency** | 92.8 ms                                  |
+# 📌 Project Overview
 
-This project integrates an underwater ROUV, Raspberry Pi 4, a YOLO11n object detection model, and a web-based monitoring dashboard to identify plastic waste in aquatic environments.
+| Item | Details |
+|------|---------|
+| **Role** | AI Engineer & Embedded Systems Developer |
+| **Duration** | 6 Months |
+| **Domain** | Computer Vision • Robotics • Embedded AI |
+| **Model** | YOLO11n |
+| **Inference Time** | 54 ms |
+| **System Latency** | 92.8 ms |
 
-## 🎯 Objectives
+This project integrates a Raspberry Pi 4, an ESP8266 microcontroller, a YOLO11n object detection model, and a web-based monitoring dashboard to perform real-time underwater plastic waste detection through remote AI inference.
 
-* Detect underwater plastic waste in real time.
-* Stream live camera footage from the ROUV.
-* Control vehicle movement through a web dashboard.
-* Monitor telemetry and system status.
-* Reduce Raspberry Pi processing load through distributed AI inference.
+---
 
-## 🏗️ System Architecture
+# 🎯 Objectives
 
-The system uses a distributed processing architecture to maintain stable performance.
+- Detect underwater plastic waste in real time.
+- Stream live underwater video from the ROUV.
+- Perform AI inference on a remote laptop.
+- Control the ROUV through a web-based dashboard.
+- Monitor telemetry and detection results simultaneously.
+
+---
+
+# 🏗️ System Architecture
 
 ```text
 Underwater Camera
         │
         ▼
-Raspberry Pi 4
-Video Streaming + Vehicle Control
+ Raspberry Pi 4
+(Video Streaming & Vehicle Control)
         │
-WebSocket / UART Communication
-        │
-        ▼
-Remote Backend Server
-YOLO11n AI Inference
+ WebSocket / UART
         │
         ▼
-Web Monitoring Dashboard
-Detection Results + Controls + Telemetry
+ Laptop Backend Server
+ (YOLO11n Inference)
+        │
+        ▼
+ Web Dashboard
+ Detection • Telemetry • Control
 ```
 
-The Raspberry Pi 4 handles video acquisition, communication, and hardware control. The backend server performs YOLO inference to reduce computational load on the embedded device.
-
-## ✨ Key Features
-
-* Real-time underwater video streaming
-* Plastic waste detection using YOLO11n
-* Bounding box and confidence visualization
-* ROUV movement control
-* Ballast control
-* DC motor and stepper motor control
-* Live telemetry monitoring
-* Recording session management
-* System statistics and logging
-* WebSocket-based communication
-* UART communication between embedded components
-
-## 🛠️ Tech Stack
-
-### Artificial Intelligence
-
-* YOLO11n
-* ONNX
-* OpenCV
-* Python
-
-### Embedded Systems
-
-* Raspberry Pi 4
-* NodeMCU ESP8266
-* UART Communication
-* Underwater Camera
-* DC Motor Control
-* Stepper Motor Control
-
-### Web Technologies
-
-* Flask
-* WebSocket
-* HTML
-* JavaScript
-
-### Robotics
-
-* Remotely Operated Underwater Vehicle
-* Motor Driver Integration
-* Ballast System Control
-* Underwater Camera Integration
-
-## 📂 Project Structure
-
-```text
-ROUV-System-Development/
-│
-├── ui/                         # Web dashboard files
-├── best.pt                     # Trained YOLO model
-├── detection_server.py         # Backend detection server
-├── README.md
-└── requirements.txt
-```
-
-> Rename `detection_server copy 4.py` to `detection_server.py` so the filename is cleaner and easier to run.
-
-## ⚙️ Installation
-
-# ROUV Plastic Waste Detection System
-
-## Installation and User Guide
-
-This guide explains how to set up and run the Real-Time Plastic Waste Detection System on the laptop, Raspberry Pi, and ESP8266.
+The Raspberry Pi captures video, controls the ROUV hardware, and transmits camera frames to the laptop. The laptop performs real-time YOLO11n inference and hosts the monitoring dashboard for visualization and control.
 
 ---
 
-# 1. Laptop Setup
+# ✨ Features
 
-### Step 1. Download the Project
+- Real-time underwater video streaming
+- YOLO11n plastic waste detection
+- Remote AI inference
+- Web-based monitoring dashboard
+- Thruster control
+- Ballast control
+- ESP8266 serial communication
+- Live telemetry monitoring
+- Detection confidence visualization
+- Session recording
+- WebSocket communication
+
+---
+
+# 🛠 Hardware Requirements
+
+- Laptop (Windows 10/11)
+- Raspberry Pi 4 Model B
+- ESP8266 NodeMCU
+- Underwater Camera
+- USB Cable
+- Local Wi-Fi Network
+
+---
+
+# 💻 Software Requirements
+
+- Python 3.10 or newer
+- Arduino IDE
+- Thonny IDE (recommended)
+- Google Chrome or Microsoft Edge
+
+---
+
+# 📂 Project Structure
+
+```text
+ROUV_Plastic_Detection/
+│
+├── best.pt
+├── detection_server.py
+├── stream_client.py
+├── esp8266_rouv_serial.ino
+├── index.html
+├── requirements.txt
+├── install_requirements.bat
+├── start_server.bat
+└── README.md
+```
+
+---
+
+# ⚙️ Installation Guide
+
+## 1. Laptop Setup
+
+### Step 1 — Download the Project
 
 Download the ZIP file and extract it to any folder on your computer.
 
 ---
 
-### Step 2. Install the Required Python Libraries
+### Step 2 — Install Python Dependencies
 
-Double-click **`install_requirements.bat`**.
+Run:
 
-The installer will automatically download and install all required Python packages listed in `requirements.txt`.
+```bash
+install_requirements.bat
+```
 
-Please wait until the installation is completed before proceeding.
+or manually install all required libraries using:
 
----
+```bash
+pip install -r requirements.txt
+```
 
-### Step 3. Start the Detection Server
-
-Double-click **`start_server.bat`**.
-
-This will:
-
-* Launch the detection server.
-* Open a Command Prompt window.
-* Load the YOLO model.
-* Automatically open the web-based user interface (HTML) in your default browser.
-
-Keep the Command Prompt window open while using the system.
+Wait until the installation process is completed.
 
 ---
 
-# 2. Raspberry Pi Setup
+### Step 3 — Start the Detection Server
 
-### Step 1. Configure the Stream Client
+Run:
 
-Open **`stream_client.py`** using **Thonny** or any Python IDE available on the Raspberry Pi.
+```bash
+start_server.bat
+```
 
-Locate the server IP address in the code and replace it with your laptop's local IP address.
+The program will automatically:
 
-> **Important:**
-> Make sure that the Raspberry Pi and the laptop are connected to the same local network.
+- Load the YOLO11n model.
+- Start the backend server.
+- Launch the web dashboard in your default web browser.
 
----
-
-### Step 2. Run the Program
-
-Execute **`stream_client.py`**.
-
-The Raspberry Pi will start capturing video from the camera and transmit the video stream to the laptop for real-time object detection.
+> **Important:** Keep the Command Prompt window open while the system is running.
 
 ---
 
-# 3. ESP8266 Setup
+## 2. Raspberry Pi Setup
 
-### Step 1. Upload the Firmware
+### Step 1 — Configure the Server IP Address
 
-Connect the ESP8266 module to the laptop using a USB cable.
+Open:
 
-Open **Arduino IDE**, then open the file:
+```python
+stream_client.py
+```
 
-**`esp8266_rouv_serial.ino`**
+using **Thonny** or any Python IDE.
 
-Select the correct board and COM port, then click **Upload**.
+Locate the server IP configuration and replace it with your laptop's local IP address.
 
-Wait until the upload process completes successfully.
-
----
-
-### Step 2. Connect to Raspberry Pi
-
-Disconnect the ESP8266 from the laptop.
-
-Reconnect the ESP8266 to the Raspberry Pi using a USB cable.
-
-The ESP8266 is now ready to communicate with the Raspberry Pi for motor control and system commands.
+> **Note:** The Raspberry Pi and the laptop must be connected to the same local network.
 
 ---
 
-# System Startup Sequence
+### Step 2 — Run the Stream Client
 
-For proper operation, start the system in the following order:
+Execute:
+
+```bash
+python3 stream_client.py
+```
+
+The Raspberry Pi will start capturing camera frames and stream them to the laptop for real-time object detection.
+
+---
+
+## 3. ESP8266 Setup
+
+### Step 1 — Upload the Firmware
+
+1. Connect the ESP8266 to your laptop using a USB cable.
+2. Open **Arduino IDE**.
+3. Open:
+
+```text
+esp8266_rouv_serial.ino
+```
+
+4. Select the correct board and COM port.
+5. Click **Upload** and wait until the upload process finishes.
+
+---
+
+### Step 2 — Connect the ESP8266 to the Raspberry Pi
+
+After the upload is complete:
+
+1. Disconnect the ESP8266 from the laptop.
+2. Connect it to the Raspberry Pi via USB.
+
+The ESP8266 is now ready to communicate with the Raspberry Pi for motor control and command execution.
+
+---
+
+# ▶ System Startup Sequence
+
+To ensure proper operation, start the system in the following order:
 
 1. Upload the firmware to the ESP8266 (only required once unless the firmware is updated).
 2. Connect the ESP8266 to the Raspberry Pi.
-3. Run **`stream_client.py`** on the Raspberry Pi.
-4. Run **`start_server.bat`** on the laptop.
-5. Wait for the web interface to open automatically.
+3. Run `stream_client.py` on the Raspberry Pi.
+4. Run `start_server.bat` on the laptop.
+5. Wait until the web dashboard opens automatically.
 6. The system is now ready for real-time underwater plastic waste detection.
 
 ---
 
-# Project Files
+# 📄 Project Files
 
-| File                       | Description                                                                                      |
-| -------------------------- | ------------------------------------------------------------------------------------------------ |
-| `best.pt`                  | Trained YOLO11n model used for object detection.                                                 |
-| `detection_server.py`      | Backend server that performs real-time object detection and communicates with the web interface. |
-| `stream_client.py`         | Raspberry Pi client that captures camera frames and sends them to the laptop.                    |
-| `esp8266_rouv_serial.ino`  | ESP8266 firmware for communication and ROUV control.                                             |
-| `index.html`               | Web-based control dashboard and monitoring interface.                                            |
-| `requirements.txt`         | List of required Python libraries.                                                               |
-| `install_requirements.bat` | Automatically installs all required Python packages.                                             |
-| `start_server.bat`         | Starts the detection server and launches the web interface.                                      |
+| File | Description |
+|------|-------------|
+| **best.pt** | Trained YOLO11n model for plastic waste detection. |
+| **detection_server.py** | Backend server responsible for YOLO inference and communication with the dashboard. |
+| **stream_client.py** | Raspberry Pi client that captures and streams camera frames to the laptop. |
+| **esp8266_rouv_serial.ino** | ESP8266 firmware for motor control and serial communication. |
+| **index.html** | Web-based monitoring and control dashboard. |
+| **requirements.txt** | List of required Python packages. |
+| **install_requirements.bat** | Automatically installs all required Python libraries. |
+| **start_server.bat** | Starts the backend server and launches the dashboard. |
 
+---
 
-## 📊 Performance
+# 📊 Performance
 
-The system achieved:
+| Metric | Result |
+|---------|-------:|
+| **YOLO11n Inference Time** | 54 ms |
+| **End-to-End System Latency** | 92.8 ms |
+| **Deployment Strategy** | Remote AI Inference |
+| **Architecture** | Raspberry Pi + Laptop |
 
-| Metric                  |                       Result |
-| ----------------------- | ---------------------------: |
-| **YOLO Inference Time** |                        54 ms |
-| **End-to-End Latency**  |                      92.8 ms |
-| **Processing Approach** |     Distributed AI Inference |
-| **Deployment Type**     | Edge Device + Remote Backend |
+---
 
+# ⚠ Important Notes
 
-## 🔮 Future Improvements
+- Ensure the laptop and Raspberry Pi are connected to the **same local network**.
+- Keep the backend server running while operating the dashboard.
+- Do not close the Command Prompt window during system operation.
+- Ensure `best.pt` remains in the project directory.
 
-* Add GPS or underwater positioning support.
-* Improve underwater image enhancement.
-* Add multiple waste-class detection.
-* Integrate cloud-based logging and analytics.
-* Add alert notifications for detected plastic waste.
-* Optimize inference using TensorRT or edge accelerators.
-* Deploy the dashboard through a cloud server.
+---
 
-## 👤 Author
+# 🔮 Future Improvements
 
-**Qoshirotu Thorfi**
-AI Engineer • Embedded Systems Developer • Computer Vision Enthusiast
+- Multi-class plastic waste detection
+- Underwater image enhancement
+- TensorRT optimization
+- Cloud deployment
+- GPS or underwater localization support
+- Automatic detection notifications
+
+---
+
+# 👤 Author
+
+**Qoshirotu Thorfi Gibran Yusuf**
+
+Bachelor of Physics — Universitas Negeri Jakarta
+
+Computer Vision • Artificial Intelligence • Embedded Systems • Robotics
