@@ -109,35 +109,120 @@ ROUV-System-Development/
 
 ## ⚙️ Installation
 
-Clone this repository:
+# ROUV Plastic Waste Detection System
 
-```bash
-git clone https://github.com/qoshirotu/ROUV-System-Development.git
-cd ROUV-System-Development
-```
+## Installation and User Guide
 
-Install the required Python libraries:
+This guide explains how to set up and run the Real-Time Plastic Waste Detection System on the laptop, Raspberry Pi, and ESP8266.
 
-```bash
-pip install ultralytics opencv-python flask flask-socketio onnxruntime
-```
+---
 
-## ▶️ Running the System
+# 1. Laptop Setup
 
-Start the backend detection server:
+### Step 1. Download the Project
 
-```bash
-python detection_server.py
-```
+Download the ZIP file and extract it to any folder on your computer.
 
-Then open the dashboard URL shown in the terminal.
+---
 
-Ensure that:
+### Step 2. Install the Required Python Libraries
 
-* The YOLO model file `best.pt` is available in the project directory.
-* The Raspberry Pi and backend server are connected to the same network.
-* Camera streaming and UART configuration match your hardware setup.
-* Required serial ports and device addresses are configured correctly.
+Double-click **`install_requirements.bat`**.
+
+The installer will automatically download and install all required Python packages listed in `requirements.txt`.
+
+Please wait until the installation is completed before proceeding.
+
+---
+
+### Step 3. Start the Detection Server
+
+Double-click **`start_server.bat`**.
+
+This will:
+
+* Launch the detection server.
+* Open a Command Prompt window.
+* Load the YOLO model.
+* Automatically open the web-based user interface (HTML) in your default browser.
+
+Keep the Command Prompt window open while using the system.
+
+---
+
+# 2. Raspberry Pi Setup
+
+### Step 1. Configure the Stream Client
+
+Open **`stream_client.py`** using **Thonny** or any Python IDE available on the Raspberry Pi.
+
+Locate the server IP address in the code and replace it with your laptop's local IP address.
+
+> **Important:**
+> Make sure that the Raspberry Pi and the laptop are connected to the same local network.
+
+---
+
+### Step 2. Run the Program
+
+Execute **`stream_client.py`**.
+
+The Raspberry Pi will start capturing video from the camera and transmit the video stream to the laptop for real-time object detection.
+
+---
+
+# 3. ESP8266 Setup
+
+### Step 1. Upload the Firmware
+
+Connect the ESP8266 module to the laptop using a USB cable.
+
+Open **Arduino IDE**, then open the file:
+
+**`esp8266_rouv_serial.ino`**
+
+Select the correct board and COM port, then click **Upload**.
+
+Wait until the upload process completes successfully.
+
+---
+
+### Step 2. Connect to Raspberry Pi
+
+Disconnect the ESP8266 from the laptop.
+
+Reconnect the ESP8266 to the Raspberry Pi using a USB cable.
+
+The ESP8266 is now ready to communicate with the Raspberry Pi for motor control and system commands.
+
+---
+
+# System Startup Sequence
+
+For proper operation, start the system in the following order:
+
+1. Upload the firmware to the ESP8266 (only required once unless the firmware is updated).
+2. Connect the ESP8266 to the Raspberry Pi.
+3. Run **`stream_client.py`** on the Raspberry Pi.
+4. Run **`start_server.bat`** on the laptop.
+5. Wait for the web interface to open automatically.
+6. The system is now ready for real-time underwater plastic waste detection.
+
+---
+
+# Project Files
+
+| File                       | Description                                                                                      |
+| -------------------------- | ------------------------------------------------------------------------------------------------ |
+| `best.pt`                  | Trained YOLO11n model used for object detection.                                                 |
+| `detection_server.py`      | Backend server that performs real-time object detection and communicates with the web interface. |
+| `stream_client.py`         | Raspberry Pi client that captures camera frames and sends them to the laptop.                    |
+| `esp8266_rouv_serial.ino`  | ESP8266 firmware for communication and ROUV control.                                             |
+| `index.html`               | Web-based control dashboard and monitoring interface.                                            |
+| `requirements.txt`         | List of required Python libraries.                                                               |
+| `install_requirements.bat` | Automatically installs all required Python packages.                                             |
+| `start_server.bat`         | Starts the detection server and launches the web interface.                                      |
+
 
 ## 📊 Performance
 
@@ -150,11 +235,6 @@ The system achieved:
 | **Processing Approach** |     Distributed AI Inference |
 | **Deployment Type**     | Edge Device + Remote Backend |
 
-## 🧠 Technical Challenge
-
-Running video streaming, motor control, and AI inference simultaneously on Raspberry Pi 4 reduced frame rate and increased latency.
-
-To address this limitation, the AI inference workload was moved to a remote backend server. This allowed the Raspberry Pi to focus on video acquisition, communication, and ROUV control while maintaining responsive detection performance.
 
 ## 🔮 Future Improvements
 
