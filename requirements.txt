@@ -1,0 +1,11 @@
+ultralytics
+opencv-python
+numpy
+flask
+flask-socketio
+eventlet
+Pillow
+websockets
+pyserial
+torch
+torchvision
